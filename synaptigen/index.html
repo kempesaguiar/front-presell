@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Offer</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    height: auto;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.cookie-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    padding: 16px;
+}
+
+.cookie-modal {
+    background: #fff;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/* Texto */
+.cookie-modal h2 {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.cookie-modal p {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+}
+
+/* Botões */
+.cookie-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cookie-buttons button {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+.accept { 
+    background: #1a73e8; 
+    color: #fff; 
+} 
+.settings { 
+    background: #e0e0e0; 
+}
+
+/* Desktop */
+@media (min-width: 769px) {
+    .container {
+        height: 100vh;
+    }
+
+    .hero-img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .cookie-buttons {
+        flex-direction: row;
+    }
+
+    .cookie-buttons button {
+        width: auto;
+        flex: 1;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="/synaptigen/synaptigen.png" alt="Imagem ilustrativa do produto" class="hero-img">
+</div>
+
+<!-- MODAL COOKIES -->
+<div class="cookie-overlay" id="cookieModal">
+    <div class="cookie-modal">
+        <h2>Cookies Settings</h2>
+        <p>
+            We use cookies to improve your experience.
+            You can accept all cookies or adjust your preferences.
+        </p>
+
+        <div class="cookie-buttons">
+            <button class="accept" onclick="acceptCookies()">Accept</button>
+            <button class="settings" onclick="acceptCookies()">Preferences</button>
+        </div>
+    </div>
+</div>
+
+<script>
+localStorage.removeItem("cookiesAccepted");
+
+const affiliateLink = "https://www.checkout-ds24.com/redir/621048/kempesaguiar/";
+
+function acceptCookies() {
+    window.location.href = affiliateLink;
+}
+
+window.onload = function() {
+    if (!localStorage.getItem("cookiesAccepted")) {
+        document.getElementById("cookieModal").style.display = "flex";
+    }
+}
+</script>
+
+</body>
+</html>
