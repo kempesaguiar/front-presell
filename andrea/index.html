@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oferta Especial</title>
+<title>Product Offer</title>
 
 <style>
 body {
@@ -12,19 +12,22 @@ body {
     background: #f4f6f8;
 }
 
+/* CONTAINER */
 .container {
     width: 100%;
+    height: auto;
 }
 
 .hero-img {
     width: 100%;
+    height: auto;
     display: block;
 }
 
 .cookie-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.6);
     display: none;
     align-items: center;
     justify-content: center;
@@ -34,35 +37,25 @@ body {
 
 .cookie-modal {
     background: #fff;
-    max-width: 420px;
     width: 100%;
-    padding: 24px;
-    border-radius: 14px;
+    max-width: 420px;
+    max-height: 90vh;
+    padding: 20px;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    overflow-y: auto;
 }
 
 /* Texto */
 .cookie-modal h2 {
-    font-size: 22px;
+    font-size: 18px;
     margin-top: 0;
-    color: #1a73e8;
-}
-
-.discount-badge {
-    background: #e53935;
-    color: #fff;
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    margin-bottom: 12px;
 }
 
 .cookie-modal p {
-    font-size: 15px;
+    font-size: 14px;
+    line-height: 1.4;
     color: #555;
-    line-height: 1.5;
 }
 
 /* Botões */
@@ -74,32 +67,37 @@ body {
 }
 
 .cookie-buttons button {
+    width: 100%;
     padding: 14px;
     font-size: 16px;
     border-radius: 8px;
-    border: none;
-    cursor: pointer;
 }
 
-.accept {
-    background: #1a73e8;
-    color: #fff;
-    font-weight: bold;
-}
-
-.settings {
-    background: transparent;
-    color: #777;
-    font-size: 14px;
+.accept { 
+    background: #1a73e8; 
+    color: #fff; 
+} 
+.settings { 
+    background: #e0e0e0; 
 }
 
 /* Desktop */
 @media (min-width: 769px) {
+    .container {
+        height: 100vh;
+    }
+
+    .hero-img {
+        height: 100%;
+        object-fit: cover;
+    }
+
     .cookie-buttons {
         flex-direction: row;
     }
 
     .cookie-buttons button {
+        width: auto;
         flex: 1;
     }
 }
@@ -112,41 +110,35 @@ body {
     <img src="/andrea/andrea.png" alt="Imagem ilustrativa do produto" class="hero-img">
 </div>
 
-<!-- MODAL DE DESCONTO -->
-<div class="cookie-overlay" id="offerModal">
+<!-- MODAL COOKIES -->
+<div class="cookie-overlay" id="cookieModal">
     <div class="cookie-modal">
-        <span class="discount-badge">🔥 DESCONTO EXCLUSIVO</span>
-
-        <h2>Economize hoje mesmo!</h2>
-
+        <h2>Cookies Settings</h2>
         <p>
-            Aproveite um <strong>desconto especial por tempo limitado</strong> 
-            e tenha acesso completo ao produto com um valor reduzido.
-        </p>
-
-        <p>
-            Esta oferta é válida apenas agora. Clique abaixo para garantir seu desconto.
+            We use cookies to improve your experience.
+            You can accept all cookies or adjust your preferences.
         </p>
 
         <div class="cookie-buttons">
-            <button class="accept" onclick="goToOffer()">Quero meu desconto</button>
+            <button class="accept" onclick="acceptCookies()">Accept</button>
+            <button class="settings" onclick="acceptCookies()">Preferences</button>
         </div>
     </div>
 </div>
 
 <script>
+localStorage.removeItem("cookiesAccepted");
+
 const affiliateLink = "https://go.hotmart.com/N103550320E";
 
-function goToOffer() {
+function acceptCookies() {
     window.location.href = affiliateLink;
 }
 
-function closeModal() {
-    document.getElementById("offerModal").style.display = "none";
-}
-
 window.onload = function() {
-    document.getElementById("offerModal").style.display = "flex";
+    if (!localStorage.getItem("cookiesAccepted")) {
+        document.getElementById("cookieModal").style.display = "flex";
+    }
 }
 </script>
 
